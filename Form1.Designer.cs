@@ -54,10 +54,19 @@ namespace WindowsFormsApp2
             this.rb_3day = new System.Windows.Forms.RadioButton();
             this.rb_24hour = new System.Windows.Forms.RadioButton();
             this.lbl_logedInUser = new System.Windows.Forms.Label();
+            this.btn_logout = new System.Windows.Forms.Button();
+            this.lbl_search = new System.Windows.Forms.Label();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rb_byName = new System.Windows.Forms.RadioButton();
+            this.rb_invNo = new System.Windows.Forms.RadioButton();
+            this.rb_price = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.gb_payment.SuspendLayout();
             this.gb_delivery.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_number
@@ -315,12 +324,106 @@ namespace WindowsFormsApp2
             this.lbl_logedInUser.Text = "Loged in User";
             this.lbl_logedInUser.Click += new System.EventHandler(this.lbl_logedInUser_Click);
             // 
+            // btn_logout
+            // 
+            this.btn_logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_logout.Location = new System.Drawing.Point(905, 33);
+            this.btn_logout.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_logout.Name = "btn_logout";
+            this.btn_logout.Size = new System.Drawing.Size(83, 33);
+            this.btn_logout.TabIndex = 32;
+            this.btn_logout.Text = "Logout";
+            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            // 
+            // lbl_search
+            // 
+            this.lbl_search.AutoSize = true;
+            this.lbl_search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lbl_search.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_search.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbl_search.Location = new System.Drawing.Point(331, 25);
+            this.lbl_search.Name = "lbl_search";
+            this.lbl_search.Size = new System.Drawing.Size(144, 24);
+            this.lbl_search.TabIndex = 33;
+            this.lbl_search.Text = "Search a Product";
+            // 
+            // txt_search
+            // 
+            this.txt_search.Location = new System.Drawing.Point(329, 59);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(214, 27);
+            this.txt_search.TabIndex = 34;
+            this.txt_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_search_KeyPress);
+            // 
+            // btn_search
+            // 
+            this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_search.Location = new System.Drawing.Point(562, 59);
+            this.btn_search.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(83, 27);
+            this.btn_search.TabIndex = 35;
+            this.btn_search.Text = "Search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rb_price);
+            this.groupBox1.Controls.Add(this.rb_invNo);
+            this.groupBox1.Controls.Add(this.rb_byName);
+            this.groupBox1.Location = new System.Drawing.Point(490, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(408, 43);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Option";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // rb_byName
+            // 
+            this.rb_byName.AutoSize = true;
+            this.rb_byName.Location = new System.Drawing.Point(64, 17);
+            this.rb_byName.Name = "rb_byName";
+            this.rb_byName.Size = new System.Drawing.Size(74, 24);
+            this.rb_byName.TabIndex = 0;
+            this.rb_byName.TabStop = true;
+            this.rb_byName.Text = "Name";
+            this.rb_byName.UseVisualStyleBackColor = true;
+            // 
+            // rb_invNo
+            // 
+            this.rb_invNo.AutoSize = true;
+            this.rb_invNo.Location = new System.Drawing.Point(158, 19);
+            this.rb_invNo.Name = "rb_invNo";
+            this.rb_invNo.Size = new System.Drawing.Size(123, 24);
+            this.rb_invNo.TabIndex = 1;
+            this.rb_invNo.TabStop = true;
+            this.rb_invNo.Text = "Inventory No";
+            this.rb_invNo.UseVisualStyleBackColor = true;
+            // 
+            // rb_price
+            // 
+            this.rb_price.AutoSize = true;
+            this.rb_price.Location = new System.Drawing.Point(309, 19);
+            this.rb_price.Name = "rb_price";
+            this.rb_price.Size = new System.Drawing.Size(69, 24);
+            this.rb_price.TabIndex = 37;
+            this.rb_price.TabStop = true;
+            this.rb_price.Text = "Price";
+            this.rb_price.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1000, 562);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btn_search);
+            this.Controls.Add(this.txt_search);
+            this.Controls.Add(this.lbl_search);
+            this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.lbl_logedInUser);
             this.Controls.Add(this.gb_delivery);
             this.Controls.Add(this.gb_payment);
@@ -341,6 +444,7 @@ namespace WindowsFormsApp2
             this.Controls.Add(this.lbl_datePicker);
             this.Controls.Add(this.lbl_number);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -351,6 +455,8 @@ namespace WindowsFormsApp2
             this.gb_payment.PerformLayout();
             this.gb_delivery.ResumeLayout(false);
             this.gb_delivery.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,6 +488,14 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.RadioButton rb_payPal;
         private System.Windows.Forms.RadioButton rb_telebir;
         private System.Windows.Forms.Label lbl_logedInUser;
+        private System.Windows.Forms.Button btn_logout;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.TextBox txt_search;
+        private System.Windows.Forms.Label lbl_search;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rb_byName;
+        private System.Windows.Forms.RadioButton rb_invNo;
+        private System.Windows.Forms.RadioButton rb_price;
     }
 }
 
