@@ -14,11 +14,13 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
-        public Form1(string uName)
+       
+
+        public Form1()
         {
 
             InitializeComponent();
-            lbl_logedInUser.Text = uName;
+           // lbl_logedInUser.Text = uName;
         }
 
 
@@ -30,11 +32,11 @@ namespace WindowsFormsApp2
             string objName = txt_objName.Text;
             string count = txt_count.Text;
             string price = txt_price.Text;
-            string options;
-           
+            bool paypal = rb_payPal.Checked;
+            bool telebir = rb_telebir.Checked;
 
 
-            Class1 c = new Class1();
+            Product c = new Product();
 
             c.NAME = num;
             c.DATE = date;
@@ -42,17 +44,34 @@ namespace WindowsFormsApp2
             c.OBJNAME = objName;
             c.COUNT = count;
             c.PRICE = price;
+            c.PAYPAL = paypal;
+            c.TELEBIR = telebir;
 
             foreach(var item in chk_options.CheckedItems)
             {
                 c.OPTIONS += item.ToString();
             }
-          
+
+            if (chk_options.CheckedItems.Count != 0)
+            {
+                foreach (var payment in gb_payment.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name)
+                {
+                    c.PAYMENT += payment.ToString();
+                }
+            }
+
+            if (chk_options.CheckedItems.Count != 0)
+            {
+                foreach (var delivery in gb_delivery.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name)
+                {
+                    c.PAYMENT += delivery.ToString();
+                }
+            }
 
             c.save();
 
             dt_products.DataSource = null;
-            dt_products.DataSource = c.getAll();
+            dt_products.DataSource = Product.getAll();
             MessageBox.Show(c.OPTIONS);
 
 
@@ -114,35 +133,6 @@ namespace WindowsFormsApp2
                 errorProvider1.Clear();
             }
 
-            //if (txt_objName.Text == string.Empty)
-            //{
-            //    errorProvider1.SetError(txt_objName, "Must not be Empty");
-
-            //}
-            //else
-            //{
-            //    errorProvider1.SetError(txt_objName, "");
-            //}
-
-            //if (txt_sku.Text == string.Empty)
-            //{
-            //    errorProvider1.SetError(txt_sku, "Must not be Empty");
-
-            //}
-            //else
-            //{
-            //    errorProvider1.SetError(txt_sku, "");
-            //}
-
-            //if (txt_number.Text == string.Empty)
-            //{
-            //    errorProvider1.SetError(txt_number, "Must not be Empty");
-
-            //}
-            //else
-            //{
-            //    errorProvider1.SetError(txt_number, "");
-            //}
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -164,5 +154,88 @@ namespace WindowsFormsApp2
         {
         
         }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Form2 f2 = new Form2();
+            f2.Show();
+        }
+
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+
+            }
+
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                txt_search.Text = "";
+            }
+        }
+
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            if (rb_byName.Checked)
+            {
+                try
+                {
+                    Product i = Product.SearchByName(txt_search.Text);
+                    MessageBox.Show($"Object Name = {i.OBJNAME}\nCount = {i.COUNT}\nInventory Number = {i.INVENTORYNUMBER}\nPrice = {i.PRICE}");
+                }
+                catch (Exception c)
+                {
+                    MessageBox.Show("No results found!");
+                }
+            }
+            else if (rb_invNo.Checked)
+            {
+                    try
+                    {
+                        Product i = Product.SearchByInventoryNumber(txt_search.Text);
+                        MessageBox.Show($"Object Name = {i.OBJNAME}\nCount = {i.COUNT}\nInventory Number = {i.INVENTORYNUMBER}\nPrice = {i.PRICE}");
+                    }
+                    catch (Exception c)
+                    {
+                        MessageBox.Show("No results found!");
+                    }
+            }
+            else if (rb_price.Checked)
+            {
+                try
+                {
+                    List<Product> i = Product.searchByPrice(txt_search.Text);
+
+                    foreach (Product item in i)
+                    {
+                        MessageBox.Show($"Object Name = {item.OBJNAME}\nCount = {item.COUNT}\nInventory Number = {item.INVENTORYNUMBER}\nPrice = {item.PRICE}");
+                    }
+
+
+                }
+
+                catch (Exception c)
+                {
+                    MessageBox.Show("No results found!");
+                }
+            }
+        
+            else
+            {
+                MessageBox.Show("Please Choose The Option");
+            }
+                
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
+
