@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    class Class1
+    class Product
     {
         private string name, date, objName, inventoryNumber;
         private  string count;
@@ -18,9 +18,31 @@ namespace WindowsFormsApp2
         private bool delivery;
         private bool coupon;
         private string options = "";
+        private string payments = "";
         private bool telebir;
+        private bool payPal;
 
-        static List<Class1> class1s = new List<Class1>(); // 1 instance
+        static List<Product> products = new List<Product>(); // 1 instance
+
+
+        public string PAYMENT
+        {
+            set { payments = value; }
+            get { return payments; }
+        }
+
+
+        public bool TELEBIR
+        {
+            set { telebir = value; }
+            get { return telebir; }
+        }
+
+        public bool PAYPAL
+        {
+            set { payPal = value; }
+            get { return payPal; }
+        }
 
         public string OPTIONS
         {
@@ -92,7 +114,7 @@ namespace WindowsFormsApp2
         }
 
 
-        public Class1(string name, string date, string objName, string inventoryNumber, string count, string price)
+        public Product(string name, string date, string objName, string inventoryNumber, string count, string price)
         {
             this.name = name;
             this.date = date;
@@ -102,21 +124,35 @@ namespace WindowsFormsApp2
             this.price = price;
         }
 
-        public Class1() { }
 
-        public List<Class1> getAll()
+        public static Product SearchByName(string s)
         {
-            return class1s;
+            return getAll().Find(item => item.objName == s);
+        }
+
+        public static Product SearchByInventoryNumber(string inventoryNumber)
+        {
+            return getAll().Find(x => x.inventoryNumber == inventoryNumber);
+        }
+
+        public static List<Product> searchByPrice(string price)
+        {
+            return products.FindAll(p => p.price == price);
+        }
+
+
+        public Product() { }
+
+        public static List<Product> getAll()
+        {
+            return products;
         }
 
         public void save()
         {
-           /* var products = new List<string>();
-            products.Add(this.price);*/
-
-            class1s.Add(this);
-
-     /*       MessageBox.Show("Succesfully Added");*/
+            products.Add(this);
         }
     }
 }
+
+
