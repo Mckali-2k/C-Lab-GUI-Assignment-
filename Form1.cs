@@ -72,7 +72,22 @@ namespace WindowsFormsApp2
 
             dt_products.DataSource = null;
             dt_products.DataSource = Product.getAll();
-            MessageBox.Show(c.OPTIONS);
+            //MessageBox.Show(c.OPTIONS);
+
+
+            //foreach(var item in Product.getAll()) 
+            //{
+            //    ProductCard p = new ProductCard();
+            //    p.PRICE += "Price: " + item.PRICE;
+            //    p.TITLE = item.OBJNAME;
+            //    p.DESC = item.INVENTORYNUMBER;
+
+            //    productCard2.Controls.Add(p);
+            //}
+
+            productCard2.TITLE = "Name: " + objName;
+            productCard2.PRICE = "Price: " + price; 
+            productCard2.DESC = "Desc: " + inventoryNumber; 
 
 
         }
@@ -235,6 +250,7 @@ namespace WindowsFormsApp2
         {
 
         }
+
     }
 }
 
