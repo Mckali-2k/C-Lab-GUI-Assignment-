@@ -58,10 +58,11 @@ namespace WindowsFormsApp2
             this.lbl_search = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rb_byName = new System.Windows.Forms.RadioButton();
             this.rb_invNo = new System.Windows.Forms.RadioButton();
             this.rb_price = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.productCard2 = new WindowsFormsApp2.ProductCard();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.gb_payment.SuspendLayout();
@@ -218,11 +219,11 @@ namespace WindowsFormsApp2
             // dt_products
             // 
             this.dt_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_products.Location = new System.Drawing.Point(536, 339);
+            this.dt_products.Location = new System.Drawing.Point(536, 507);
             this.dt_products.Name = "dt_products";
             this.dt_products.RowHeadersWidth = 51;
             this.dt_products.RowTemplate.Height = 24;
-            this.dt_products.Size = new System.Drawing.Size(452, 217);
+            this.dt_products.Size = new System.Drawing.Size(505, 138);
             this.dt_products.TabIndex = 25;
             this.dt_products.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_products_CellContentClick);
             // 
@@ -239,7 +240,7 @@ namespace WindowsFormsApp2
             "Discount",
             "Coupon",
             "Store Credit"});
-            this.chk_options.Location = new System.Drawing.Point(536, 209);
+            this.chk_options.Location = new System.Drawing.Point(536, 186);
             this.chk_options.Name = "chk_options";
             this.chk_options.Size = new System.Drawing.Size(369, 114);
             this.chk_options.TabIndex = 28;
@@ -327,7 +328,7 @@ namespace WindowsFormsApp2
             // btn_logout
             // 
             this.btn_logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_logout.Location = new System.Drawing.Point(905, 33);
+            this.btn_logout.Location = new System.Drawing.Point(958, 53);
             this.btn_logout.Margin = new System.Windows.Forms.Padding(4);
             this.btn_logout.Name = "btn_logout";
             this.btn_logout.Size = new System.Drawing.Size(83, 33);
@@ -368,19 +369,6 @@ namespace WindowsFormsApp2
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rb_price);
-            this.groupBox1.Controls.Add(this.rb_invNo);
-            this.groupBox1.Controls.Add(this.rb_byName);
-            this.groupBox1.Location = new System.Drawing.Point(490, 9);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(408, 43);
-            this.groupBox1.TabIndex = 36;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Option";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
             // rb_byName
             // 
             this.rb_byName.AutoSize = true;
@@ -414,11 +402,36 @@ namespace WindowsFormsApp2
             this.rb_price.Text = "Price";
             this.rb_price.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rb_price);
+            this.groupBox1.Controls.Add(this.rb_invNo);
+            this.groupBox1.Controls.Add(this.rb_byName);
+            this.groupBox1.Location = new System.Drawing.Point(490, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(408, 43);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Option";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // productCard2
+            // 
+            this.productCard2.DESC = null;
+            this.productCard2.Location = new System.Drawing.Point(536, 320);
+            this.productCard2.Margin = new System.Windows.Forms.Padding(4);
+            this.productCard2.Name = "productCard2";
+            this.productCard2.PRICE = null;
+            this.productCard2.Size = new System.Drawing.Size(505, 169);
+            this.productCard2.TabIndex = 37;
+            this.productCard2.TITLE = null;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1000, 562);
+            this.ClientSize = new System.Drawing.Size(1076, 670);
+            this.Controls.Add(this.productCard2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.txt_search);
@@ -447,6 +460,7 @@ namespace WindowsFormsApp2
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).EndInit();
@@ -493,9 +507,11 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Label lbl_search;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rb_byName;
-        private System.Windows.Forms.RadioButton rb_invNo;
         private System.Windows.Forms.RadioButton rb_price;
+        private System.Windows.Forms.RadioButton rb_invNo;
+        private System.Windows.Forms.RadioButton rb_byName;
+        private ProductCard productCard1;
+        private ProductCard productCard2;
     }
 }
 
