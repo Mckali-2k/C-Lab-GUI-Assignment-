@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +15,7 @@ namespace WindowsFormsApp2
         public Panel()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
         }
 
         private void btn_green_Click(object sender, EventArgs e)
@@ -41,20 +42,33 @@ namespace WindowsFormsApp2
 
         }
 
+        private void card_click(object o, EventArgs e)
+        {
+            MessageBox.Show("Clicked");
+        }
+
         private void Panel_Load(object sender, EventArgs e)
         {
             List<Product> products = Product.getAll();
 
             flowLayoutPanel1.Controls.Clear();
 
-            foreach(var item in products)
+            foreach (var item in products)
             {
                 ProductCard p = new ProductCard();
-                p.PRICE = item.PRICE;
-                p.TITLE = item.OBJNAME;
-                p.DESC = item.INVENTORYNUMBER;
+
+                p.PRICE = "PRICE: " + item.PRICE;
+                p.TITLE = "NAME: " + item.OBJNAME;
+                p.DESC = "INVENTORY NO: " + item.INVENTORYNUMBER;
+                p.Click += (object obj, EventArgs ev) =>
+                {
+                    DetailPage dp = new DetailPage(item);
+                    dp.Show();
+                };
 
                 flowLayoutPanel1.Controls.Add(p);
+
+            
             }
         }
 
@@ -62,5 +76,6 @@ namespace WindowsFormsApp2
         {
             Application.Exit();
         }
+
     }
 }
