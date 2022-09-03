@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace WindowsFormsApp2
 {
-    class Product
+    public class Product
     {
-        private string name, date, objName, inventoryNumber;
+
+        private string number, date, objName, inventoryNumber;
         private  string count;
         private string price;
         private bool isAvailable;
@@ -24,6 +26,11 @@ namespace WindowsFormsApp2
 
         static List<Product> products = new List<Product>(); // 1 instance
 
+        public string NUMBER
+        {
+            set { number = value; }
+            get { return number; }
+        }
 
         public string PAYMENT
         {
@@ -76,13 +83,6 @@ namespace WindowsFormsApp2
             get { return discount; }
         }
 
-
-        public string NAME
-        {
-            set { name = value; }
-            get { return name; }
-        }
-
         public string DATE
         {
             set { date = value; }
@@ -114,9 +114,9 @@ namespace WindowsFormsApp2
         }
 
 
-        public Product(string name, string date, string objName, string inventoryNumber, string count, string price)
+        public Product(string number, string date, string objName, string inventoryNumber, string count, string price)
         {
-            this.name = name;
+            this.number = number;
             this.date = date;
             this.objName = objName;
             this.inventoryNumber = inventoryNumber;
@@ -137,22 +137,65 @@ namespace WindowsFormsApp2
 
         public static List<Product> searchByPrice(string price)
         {
-            return products.FindAll(p => p.price == price);
+            return getAll().FindAll(p => p.price == price);
         }
 
 
         public Product() { }
 
-        public static List<Product> getAll()
-        {
-            return products;
-        }
-
         public void save()
         {
-            products.Add(this);
+            try
+            {
+
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-NUDAC26\SQLEXPRESS;Initial Catalog=product;Integrated Security=True");
+                con.Open();
+                SqlCommand cmd = new SqlCommand($"insert into Products values({this.number},'{this.date}',{this.inventoryNumber},'{this.objName}',{this.count},{this.price})", con);
+                cmd.ExecuteReader();
+
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
+        public static List<Product> getAll()
+        {
+            List<Product> products = new List<Product>();
+            try
+            {
+
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-NUDAC26\SQLEXPRESS;Initial Catalog=product;Integrated Security=True");
+                con.Open();
+                SqlCommand cmd = new SqlCommand($"select * from Products", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    products.Add(new Product()
+                    {
+                        number = dr["pNumber"].ToString(),
+                        date = dr["pDate"].ToString(),
+                        inventoryNumber = dr["pInventoryNumber"].ToString(),
+                        objName = dr["pObjectName"].ToString(),
+                        count = dr["pCount"].ToString(),
+                        price = dr["pPrice"].ToString(),
+                    }
+                    );
+                }
+
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return products;
         }
     }
 }
-
-
